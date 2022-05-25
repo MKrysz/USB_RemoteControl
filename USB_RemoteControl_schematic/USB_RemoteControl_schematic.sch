@@ -173,17 +173,6 @@ Wire Wire Line
 Wire Wire Line
 	1900 1050 1450 1050
 $Comp
-L Regulator_Linear:AMS1117-3.3 U1
-U 1 1 6238BD11
-P 2700 800
-F 0 "U1" H 2700 1042 50  0000 C CNN
-F 1 "AMS1117-3.3" H 2700 951 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 2700 1000 50  0001 C CNN
-F 3 "http://www.advanced-monolithic.com/pdf/ds1117.pdf" H 2800 550 50  0001 C CNN
-	1    2700 800 
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C C1
 U 1 1 6238C8CF
 P 2250 1000
@@ -211,7 +200,7 @@ U 1 1 6238D52B
 P 3450 1000
 F 0 "C3" H 3450 1100 50  0000 L CNN
 F 1 "100nF" H 3450 900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 3488 850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 3488 850 50  0001 C CNN
 F 3 "~" H 3450 1000 50  0001 C CNN
 	1    3450 1000
 	1    0    0    -1  
@@ -385,23 +374,23 @@ Wire Wire Line
 $Comp
 L Device:LED D1
 U 1 1 623CB48F
-P 850 3050
-F 0 "D1" V 889 2932 50  0000 R CNN
-F 1 "Green" V 798 2932 50  0000 R CNN
-F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 850 3050 50  0001 C CNN
-F 3 "~" H 850 3050 50  0001 C CNN
-	1    850  3050
+P 850 3400
+F 0 "D1" V 889 3282 50  0000 R CNN
+F 1 "Green" V 798 3282 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 850 3400 50  0001 C CNN
+F 3 "~" H 850 3400 50  0001 C CNN
+	1    850  3400
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R4
 U 1 1 623CBE47
-P 850 3400
-F 0 "R4" H 920 3446 50  0000 L CNN
-F 1 "1K" H 920 3355 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 780 3400 50  0001 C CNN
-F 3 "~" H 850 3400 50  0001 C CNN
-	1    850  3400
+P 850 3050
+F 0 "R4" H 920 3096 50  0000 L CNN
+F 1 "1K" H 920 3005 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 780 3050 50  0001 C CNN
+F 3 "~" H 850 3050 50  0001 C CNN
+	1    850  3050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -459,7 +448,7 @@ U 1 1 623E77BF
 P 4000 1000
 F 0 "C4" H 4000 1100 50  0000 L CNN
 F 1 "100nF" H 4000 900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4038 850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 4038 850 50  0001 C CNN
 F 3 "~" H 4000 1000 50  0001 C CNN
 	1    4000 1000
 	1    0    0    -1  
@@ -470,7 +459,7 @@ U 1 1 623E9A33
 P 4300 1000
 F 0 "C5" H 4300 1100 50  0000 L CNN
 F 1 "100nF" H 4300 900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4338 850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 4338 850 50  0001 C CNN
 F 3 "~" H 4300 1000 50  0001 C CNN
 	1    4300 1000
 	1    0    0    -1  
@@ -481,7 +470,7 @@ U 1 1 623EBD4F
 P 4600 1000
 F 0 "C6" H 4600 1100 50  0000 L CNN
 F 1 "100nF" H 4600 900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4638 850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 4638 850 50  0001 C CNN
 F 3 "~" H 4600 1000 50  0001 C CNN
 	1    4600 1000
 	1    0    0    -1  
@@ -492,7 +481,7 @@ U 1 1 623F0525
 P 4900 1000
 F 0 "C7" H 4900 1100 50  0000 L CNN
 F 1 "100nF" H 4900 900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4938 850 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" H 4938 850 50  0001 C CNN
 F 3 "~" H 4900 1000 50  0001 C CNN
 	1    4900 1000
 	1    0    0    -1  
@@ -561,10 +550,10 @@ Wire Wire Line
 Connection ~ 4450 800 
 Wire Wire Line
 	4450 800  4300 800 
-Text Label 5600 2100 0    50   ~ 0
+Text Label 7600 2500 2    50   ~ 0
 DBG_LED
 Wire Wire Line
-	5600 2100 5950 2100
+	7600 2500 7250 2500
 Text Label 3400 2700 2    50   ~ 0
 boot
 Wire Wire Line
@@ -653,229 +642,25 @@ Wire Wire Line
 Wire Wire Line
 	3150 3050 3150 3100
 $Comp
-L Device:Jumper_NO_Small JP1
-U 1 1 623B7474
-P 3750 4000
-F 0 "JP1" H 3850 3950 50  0000 L CNN
-F 1 "OPT_0" H 3450 3950 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4000 50  0001 C CNN
-F 3 "~" H 3750 4000 50  0001 C CNN
-	1    3750 4000
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR09
-U 1 1 623DB508
-P 3450 4750
-F 0 "#PWR09" H 3450 4500 50  0001 C CNN
-F 1 "GND" H 3455 4577 50  0000 C CNN
-F 2 "" H 3450 4750 50  0001 C CNN
-F 3 "" H 3450 4750 50  0001 C CNN
-	1    3450 4750
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP2
-U 1 1 62450419
-P 3750 4100
-F 0 "JP2" H 3850 4050 50  0000 L CNN
-F 1 "OPT_1" H 3450 4050 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4100 50  0001 C CNN
-F 3 "~" H 3750 4100 50  0001 C CNN
-	1    3750 4100
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP3
-U 1 1 624555F4
-P 3750 4200
-F 0 "JP3" H 3850 4150 50  0000 L CNN
-F 1 "OPT_2" H 3450 4150 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4200 50  0001 C CNN
-F 3 "~" H 3750 4200 50  0001 C CNN
-	1    3750 4200
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP4
-U 1 1 6245A6E7
-P 3750 4300
-F 0 "JP4" H 3850 4250 50  0000 L CNN
-F 1 "OPT_3" H 3450 4250 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4300 50  0001 C CNN
-F 3 "~" H 3750 4300 50  0001 C CNN
-	1    3750 4300
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP5
-U 1 1 6245F946
-P 3750 4400
-F 0 "JP5" H 3850 4350 50  0000 L CNN
-F 1 "OPT_4" H 3450 4350 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4400 50  0001 C CNN
-F 3 "~" H 3750 4400 50  0001 C CNN
-	1    3750 4400
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP6
-U 1 1 62464BC6
-P 3750 4500
-F 0 "JP6" H 3850 4450 50  0000 L CNN
-F 1 "OPT_5" H 3450 4450 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4500 50  0001 C CNN
-F 3 "~" H 3750 4500 50  0001 C CNN
-	1    3750 4500
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP7
-U 1 1 62480368
-P 3750 4600
-F 0 "JP7" H 3850 4550 50  0000 L CNN
-F 1 "OPT_6" H 3450 4550 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4600 50  0001 C CNN
-F 3 "~" H 3750 4600 50  0001 C CNN
-	1    3750 4600
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:Jumper_NO_Small JP8
-U 1 1 6248411A
-P 3750 4700
-F 0 "JP8" H 3850 4650 50  0000 L CNN
-F 1 "OPT_7" H 3450 4650 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 3750 4700 50  0001 C CNN
-F 3 "~" H 3750 4700 50  0001 C CNN
-	1    3750 4700
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3650 4000 3450 4000
-Wire Wire Line
-	3450 4000 3450 4100
-Wire Wire Line
-	3450 4700 3650 4700
-Wire Wire Line
-	3650 4600 3450 4600
-Connection ~ 3450 4600
-Wire Wire Line
-	3450 4600 3450 4700
-Wire Wire Line
-	3650 4100 3450 4100
-Connection ~ 3450 4100
-Wire Wire Line
-	3450 4100 3450 4200
-Wire Wire Line
-	3650 4200 3450 4200
-Connection ~ 3450 4200
-Wire Wire Line
-	3450 4200 3450 4300
-Wire Wire Line
-	3650 4300 3450 4300
-Connection ~ 3450 4300
-Wire Wire Line
-	3450 4300 3450 4400
-Wire Wire Line
-	3650 4400 3450 4400
-Connection ~ 3450 4400
-Wire Wire Line
-	3450 4400 3450 4500
-Wire Wire Line
-	3650 4500 3450 4500
-Connection ~ 3450 4500
-Wire Wire Line
-	3450 4500 3450 4600
-Wire Wire Line
-	3450 4750 3450 4700
-Connection ~ 3450 4700
-Text Label 4350 4000 2    50   ~ 0
-OPT_0
-Text Label 4350 4100 2    50   ~ 0
-OPT_1
-Text Label 4350 4200 2    50   ~ 0
-OPT_2
-Text Label 4350 4300 2    50   ~ 0
-OPT_3
-Text Label 4350 4400 2    50   ~ 0
-OPT_4
-Text Label 4350 4500 2    50   ~ 0
-OPT_5
-Text Label 4350 4600 2    50   ~ 0
-OPT_6
-Text Label 4350 4700 2    50   ~ 0
-OPT_7
-Wire Wire Line
-	3850 4000 4350 4000
-Wire Wire Line
-	3850 4100 4350 4100
-Wire Wire Line
-	3850 4200 4350 4200
-Wire Wire Line
-	3850 4300 4350 4300
-Wire Wire Line
-	3850 4400 4350 4400
-Wire Wire Line
-	3850 4500 4350 4500
-Wire Wire Line
-	3850 4600 4350 4600
-Wire Wire Line
-	3850 4700 4350 4700
-Text Label 7750 4000 2    50   ~ 0
-OPT_0
-Text Label 5450 2800 0    50   ~ 0
-OPT_1
-Text Label 5450 2900 0    50   ~ 0
-OPT_2
-Text Label 5450 3000 0    50   ~ 0
-OPT_3
-Text Label 5450 3100 0    50   ~ 0
-OPT_4
-Text Label 5450 3200 0    50   ~ 0
-OPT_5
-Text Label 5450 3300 0    50   ~ 0
-OPT_6
-Text Label 5450 3400 0    50   ~ 0
-OPT_7
-Wire Wire Line
-	7250 4000 7750 4000
-Wire Wire Line
-	5950 2800 5450 2800
-Wire Wire Line
-	5950 2900 5450 2900
-Wire Wire Line
-	5950 3000 5450 3000
-Wire Wire Line
-	5950 3100 5450 3100
-Wire Wire Line
-	5950 3200 5450 3200
-Wire Wire Line
-	5950 3300 5450 3300
-Wire Wire Line
-	5950 3400 5450 3400
-Text Notes 3450 3850 0    50   ~ 0
-Mode Choose Resistors
-$Comp
 L Device:LED D2
 U 1 1 625F9984
-P 1500 3050
-F 0 "D2" V 1539 2932 50  0000 R CNN
-F 1 "Red" V 1448 2932 50  0000 R CNN
-F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 1500 3050 50  0001 C CNN
-F 3 "~" H 1500 3050 50  0001 C CNN
-	1    1500 3050
+P 1500 3400
+F 0 "D2" V 1539 3282 50  0000 R CNN
+F 1 "Red" V 1448 3282 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1500 3400 50  0001 C CNN
+F 3 "~" H 1500 3400 50  0001 C CNN
+	1    1500 3400
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R6
 U 1 1 625F998A
-P 1500 3400
-F 0 "R6" H 1570 3446 50  0000 L CNN
-F 1 "1K" H 1570 3355 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 1430 3400 50  0001 C CNN
-F 3 "~" H 1500 3400 50  0001 C CNN
-	1    1500 3400
+P 1500 3050
+F 0 "R6" H 1570 3096 50  0000 L CNN
+F 1 "1K" H 1570 3005 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 1430 3050 50  0001 C CNN
+F 3 "~" H 1500 3050 50  0001 C CNN
+	1    1500 3050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1008,43 +793,6 @@ Wire Wire Line
 	9150 1350 9500 1350
 Wire Wire Line
 	9150 1450 9500 1450
-$Comp
-L power:GND #PWR0107
-U 1 1 6295270F
-P 10900 1800
-F 0 "#PWR0107" H 10900 1550 50  0001 C CNN
-F 1 "GND" H 10905 1627 50  0000 C CNN
-F 2 "" H 10900 1800 50  0001 C CNN
-F 3 "" H 10900 1800 50  0001 C CNN
-	1    10900 1800
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3V3 #PWR0108
-U 1 1 629587C8
-P 10900 1400
-F 0 "#PWR0108" H 10900 1250 50  0001 C CNN
-F 1 "+3V3" H 10915 1573 50  0000 C CNN
-F 2 "" H 10900 1400 50  0001 C CNN
-F 3 "" H 10900 1400 50  0001 C CNN
-	1    10900 1400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C10
-U 1 1 6297C224
-P 10900 1600
-F 0 "C10" H 10900 1700 50  0000 L CNN
-F 1 "10uF" H 10900 1500 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 10938 1450 50  0001 C CNN
-F 3 "~" H 10900 1600 50  0001 C CNN
-	1    10900 1600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10900 1400 10900 1450
-Wire Wire Line
-	10900 1750 10900 1800
 Text Label 9150 1050 0    50   ~ 0
 BT_RST
 Wire Wire Line
@@ -1144,7 +892,7 @@ U 1 1 62A0B2B8
 P 10250 3550
 F 0 "D3" V 10289 3432 50  0000 R CNN
 F 1 "Green" V 10198 3432 50  0000 R CNN
-F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 10250 3550 50  0001 C CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10250 3550 50  0001 C CNN
 F 3 "~" H 10250 3550 50  0001 C CNN
 	1    10250 3550
 	0    -1   -1   0   
@@ -1185,7 +933,7 @@ U 1 1 62A3EA59
 P 10750 3550
 F 0 "D4" V 10789 3432 50  0000 R CNN
 F 1 "Blue" V 10698 3432 50  0000 R CNN
-F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 10750 3550 50  0001 C CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10750 3550 50  0001 C CNN
 F 3 "~" H 10750 3550 50  0001 C CNN
 	1    10750 3550
 	0    -1   -1   0   
@@ -1207,12 +955,23 @@ Wire Wire Line
 	10750 3350 10750 3400
 Wire Wire Line
 	10750 3700 10750 3750
-Text Label 7600 3500 2    50   ~ 0
+Text Label 5600 3200 0    50   ~ 0
 MCU_RX
-Text Label 7600 3400 2    50   ~ 0
+Text Label 5600 3100 0    50   ~ 0
 MCU_TX
 Wire Wire Line
-	7600 3500 7250 3500
+	5600 3200 5950 3200
 Wire Wire Line
-	7600 3400 7250 3400
+	5600 3100 5950 3100
+$Comp
+L Regulator_Linear:HT75xx-1-SOT89 U1
+U 1 1 62B127B9
+P 2700 900
+F 0 "U1" H 2700 1267 50  0000 C CNN
+F 1 "HT7533" H 2700 1176 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-89-3" H 2700 1225 50  0001 C CIN
+F 3 "https://www.holtek.com/documents/10179/116711/HT75xx-1v250.pdf" H 2700 1000 50  0001 C CNN
+	1    2700 900 
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
