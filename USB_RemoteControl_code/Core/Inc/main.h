@@ -58,31 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define DBG_LED_Pin GPIO_PIN_13
-#define DBG_LED_GPIO_Port GPIOC
-#define RF_IRQ_Pin GPIO_PIN_0
-#define RF_IRQ_GPIO_Port GPIOA
-#define RF_IRQ_EXTI_IRQn EXTI0_IRQn
-#define RF_CE_Pin GPIO_PIN_1
-#define RF_CE_GPIO_Port GPIOA
-#define RF_CSN_Pin GPIO_PIN_2
-#define RF_CSN_GPIO_Port GPIOA
-#define OPT_0_Pin GPIO_PIN_15
-#define OPT_0_GPIO_Port GPIOA
-#define OPT_1_Pin GPIO_PIN_3
-#define OPT_1_GPIO_Port GPIOB
-#define OPT_2_Pin GPIO_PIN_4
-#define OPT_2_GPIO_Port GPIOB
-#define OPT_3_Pin GPIO_PIN_5
-#define OPT_3_GPIO_Port GPIOB
-#define OPT_4_Pin GPIO_PIN_6
-#define OPT_4_GPIO_Port GPIOB
-#define OPT_5_Pin GPIO_PIN_7
-#define OPT_5_GPIO_Port GPIOB
-#define OPT_6_Pin GPIO_PIN_8
-#define OPT_6_GPIO_Port GPIOB
-#define OPT_7_Pin GPIO_PIN_9
-#define OPT_7_GPIO_Port GPIOB
+#define DBG_LED_Pin GPIO_PIN_0
+#define DBG_LED_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
