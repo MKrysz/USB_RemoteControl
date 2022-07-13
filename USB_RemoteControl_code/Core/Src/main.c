@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 #include "keyboard.h"
 /* USER CODE END Includes */
 
@@ -92,6 +93,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   KEYBOARD_Init();
+  char UART_Buffer[UART_BUFFER_SIZE] = "";
 
   /* USER CODE END 2 */
 
@@ -99,9 +101,30 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    KEYBOARD_SendKey(KEYBOARD_KEY_O, KEYBOARD_MOD_NO_MOD);
-    HAL_GPIO_TogglePin(DBG_LED_GPIO_Port, DBG_LED_Pin);
-    HAL_Delay(1000);
+    for (size_t i = 0; i < UART_BUFFER_SIZE; i++)
+    {
+      UART_Buffer[i] = 0;
+    }
+    HAL_UART_Receive(&huart1, UART_Buffer, UART_BUFFER_SIZE, 500);
+    if(UART_Buffer[0] == 0)
+      continue;
+    #define cmdEq(X) (strcmp(UART_Buffer, (X)) == 0)
+    if(cmdEq("%Right")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_RIGHT_ARROW, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
+    }
+    else if(cmdEq("%Left")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
+    }
+    else if(cmdEq("%Center")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_SPACEBAR, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
+    }
+    // else if(cmdEq("%Test")){
+    //   KEYBOARD_SendKey(KEYBOARD_KEY_MUTE, 0);
+    // }
+    else{
+      KEYBOARD_Print("NOOP\n", KEYBOARD_MOD_NO_MOD);
+    }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
