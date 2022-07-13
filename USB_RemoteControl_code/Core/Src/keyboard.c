@@ -12,33 +12,43 @@ void KEYBOARD_Init()
     USB_delay = USBD_HID_GetPollingInterval(&hUsbDeviceFS);
 }
 
-void KEYBOARD_Enter()
+void KEYBOARD_PressKeys(uint8_t *keys, size_t nrOfKeys, uint8_t modifier)
 {
-    KEYBOARD_SendKey(KEYBOARD_KEY_ENTER, KEYBOARD_MOD_NO_MOD);
-}
-
-void KEYBOARD_Lock()
-{
-    keyboardHID_t keyboardReport = {0,0,0,0,0,0,0,0};
-    keyboardReport.MODIFIER = KEYBOARD_MOD_LEFT_WIN;
-    keyboardReport.KEYCODE1 = KEYBOARD_KEY_L;
-    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
-    HAL_Delay(250);
-    keyboardReport.MODIFIER = 0x00;  // mod release
-    keyboardReport.RESERVED = 0x00;
-    keyboardReport.KEYCODE1 = 0x00;  // release key
-    keyboardReport.KEYCODE2 = 0x00;  // release key
-    keyboardReport.KEYCODE3 = 0x00;  // release key
-    keyboardReport.KEYCODE4 = 0x00;  // release key
-    keyboardReport.KEYCODE5 = 0x00;  // release key
-    keyboardReport.KEYCODE6 = 0x00;  // release key
+    keyboardHID_t keyboardReport = {0};
+    for (size_t i = 0; i < 6; i++)
+    {
+        keyboardReport.KEYCODE[i] = i<nrOfKeys?keys[i]:0;
+    }
+    keyboardReport.MODIFIER = modifier;
     USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
     SEND_DELAY;
 }
 
-void KEYBOARD_Clear()
+void KEYBOARD_PressKey(uint8_t key, uint8_t modifier)
 {
-    return;
+    KEYBOARD_PressKeys(&key, 1, modifier);
+}
+
+void KEYBOARD_Release()
+{
+    KEYBOARD_PressKey(0,0);
+}
+
+void KEYBOARD_SendKey(uint8_t key, uint8_t modifier)
+{
+    KEYBOARD_PressKey(key, modifier);
+    KEYBOARD_Release();
+}
+
+void KEYBOARD_SendKeys(uint8_t *keys, uint8_t nrOfKeys, uint8_t modifier)
+{
+    KEYBOARD_PressKeys(keys, 1, modifier);
+    KEYBOARD_Release();
+}
+
+void KEYBOARD_Enter()
+{
+    KEYBOARD_SendKey(KEYBOARD_KEY_ENTER, KEYBOARD_MOD_NO_MOD);
 }
 
 void KEYBOARD_Print(char* message, uint8_t modifier)
@@ -200,65 +210,6 @@ void KEYBOARD_Print(char* message, uint8_t modifier)
                 break;
         }
     }
-    KEYBOARD_Clear();
-}
-
-/**
- * @brief send one key report 
- * 
- * @param key key to be send from KEYBOARD_KEY
- * @param modifier modifier from KEYBOARD_MOD
- */
-void KEYBOARD_SendKey(uint8_t key, uint8_t modifier)
-{
-    //send actual data
-    keyboardHID_t keyboardReport;
-    keyboardReport.MODIFIER = modifier;  // mod release
-    keyboardReport.RESERVED = 0x00;
-    keyboardReport.KEYCODE1 = key;
-    keyboardReport.KEYCODE2 = 0x00;  // release key
-    keyboardReport.KEYCODE3 = 0x00;  // release key
-    keyboardReport.KEYCODE4 = 0x00;  // release key
-    keyboardReport.KEYCODE5 = 0x00;  // release key
-    keyboardReport.KEYCODE6 = 0x00;  // release key
-    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
-    SEND_DELAY;
-    //clear that data
-    keyboardReport.MODIFIER = 0x00;  // mod release
-    keyboardReport.RESERVED = 0x00;
-    keyboardReport.KEYCODE1 = 0x00;  // release key
-    keyboardReport.KEYCODE2 = 0x00;  // release key
-    keyboardReport.KEYCODE3 = 0x00;  // release key
-    keyboardReport.KEYCODE4 = 0x00;  // release key
-    keyboardReport.KEYCODE5 = 0x00;  // release key
-    keyboardReport.KEYCODE6 = 0x00;  // release key
-    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
-    SEND_DELAY;
-}
-
-/**
- * @brief send up to 5 different keys in one report
- * 
- * @param keys pointer to an array of keys' IDs
- * @param nrOfKeys size of an array, 5 at max
- * @param modifier modifier from KEYBOARD_MOD
- */
-void KEYBOARD_SendKeys(uint8_t *keys, uint8_t nrOfKeys, uint8_t modifier)
-{
-    #define checkAndWrite(x) nrOfKeys > (x)? keys[(x)]: 0
-    keyboardHID_t keyboardReport;
-    keyboardReport.MODIFIER = modifier;  // mod release
-    keyboardReport.RESERVED = 0x00;
-    keyboardReport.KEYCODE1 = checkAndWrite(0);
-    keyboardReport.KEYCODE2 = checkAndWrite(1);  // release key
-    keyboardReport.KEYCODE3 = checkAndWrite(2);  // release key
-    keyboardReport.KEYCODE4 = checkAndWrite(3);  // release key
-    keyboardReport.KEYCODE5 = checkAndWrite(4);  // release key
-    keyboardReport.KEYCODE6 = checkAndWrite(5);  // release key
-    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
-    SEND_DELAY;
-    #undef checkAndWrite
-
 }
 
 

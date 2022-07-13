@@ -2,17 +2,11 @@
 #define E5BD33A5_2FCA_489D_BDA3_25396E6F4612
 
 #include "main.h"
-
 typedef struct
 {
 	uint8_t MODIFIER;
 	uint8_t RESERVED;
-	uint8_t KEYCODE1;
-	uint8_t KEYCODE2;
-	uint8_t KEYCODE3;
-	uint8_t KEYCODE4;
-	uint8_t KEYCODE5;
-	uint8_t KEYCODE6;
+	uint8_t KEYCODE[6];
 } keyboardHID_t;
 
 
@@ -124,12 +118,14 @@ typedef struct
 #define KEYBOARD_KEY_VOLUME_UP 128
 #define KEYBOARD_KEY_VOLUME_DOWN 129
 
-void KEYBOARD_SendLock();
 void KEYBOARD_Init();
 void KEYBOARD_Enter();
 void KEYBOARD_Clear();
 void KEYBOARD_Print(char* message, uint8_t modifier);
 void KEYBOARD_SendKey(uint8_t key, uint8_t modifier);
 void KEYBOARD_SendKeys(uint8_t *keys, uint8_t nrOfKeys, uint8_t modifier);
+void KEYBOARD_PressKey(uint8_t key, uint8_t modifier);
+void KEYBOARD_Release();
+void KEYBOARD_PressKeys(uint8_t *keys, size_t nrOfKeys, uint8_t modifier);
 
 #endif /* E5BD33A5_2FCA_489D_BDA3_25396E6F4612 */
