@@ -27,9 +27,6 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include "keyboard.h"
-#include "usbd_hid.h"
-#include "usb_device.h"
-extern USBD_HandleTypeDef hUsbDeviceFS;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,27 +36,6 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
-// USB media codes
-#define USB_HID_SCAN_NEXT 0x01
-#define USB_HID_SCAN_PREV 0x02
-#define USB_HID_STOP      0x04
-#define USB_HID_EJECT     0x08
-#define USB_HID_PAUSE     0x10
-#define USB_HID_MUTE      0x20
-#define USB_HID_VOL_UP    0x40
-#define USB_HID_VOL_DEC   0x80
-
-// USB keyboard codes
-#define USB_HID_MODIFIER_LEFT_CTRL   0x01
-#define USB_HID_MODIFIER_LEFT_SHIFT  0x02
-#define USB_HID_MODIFIER_LEFT_ALT    0x04
-#define USB_HID_MODIFIER_LEFT_GUI    0x08 // (Win/Apple/Meta)
-#define USB_HID_MODIFIER_RIGHT_CTRL  0x10
-#define USB_HID_MODIFIER_RIGHT_SHIFT 0x20
-#define USB_HID_MODIFIER_RIGHT_ALT   0x40
-#define USB_HID_MODIFIER_RIGHT_GUI   0x80
-#define USB_HID_KEY_L     0x0F
 
 #define UART_BUFFER_SIZE 128
 /* USER CODE END PD */
@@ -93,28 +69,6 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  // HID Keyboard
-  struct keyboardHID_t {
-      uint8_t id;
-      uint8_t modifiers;
-      uint8_t key1;
-      uint8_t key2;
-      uint8_t key3;
-  };
-  struct keyboardHID_t keyboardHID;
-  keyboardHID.id = 1;
-  keyboardHID.modifiers = 0;
-  keyboardHID.key1 = 0;
-  keyboardHID.key2 = 0;
-  keyboardHID.key3 = 0;
-  // HID Media
-  struct mediaHID_t {
-    uint8_t id;
-    uint8_t keys;
-  };
-  struct mediaHID_t mediaHID;
-  mediaHID.id = 2;
-  mediaHID.keys = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -147,35 +101,72 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // for (size_t i = 0; i < UART_BUFFER_SIZE; i++)
-    // {
-    //   UART_Buffer[i] = 0;
-    // }
-    // HAL_UART_Receive(&huart1, UART_Buffer, UART_BUFFER_SIZE, 500);
-    // if(UART_Buffer[0] == 0)
-    //   continue;
-    // #define cmdEq(X) (strcmp(UART_Buffer, (X)) == 0)
-    // if(cmdEq("Right")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_RIGHT_ARROW, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
-    // }
-    // else if(cmdEq("Left")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
-    // }
-    // else if(cmdEq("Center")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_SPACEBAR, KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_LEFT_ALT);
-    // }
-    // else if(cmdEq("VolUp")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_VOLUME_UP, 0);
-    // }
-    // else if(cmdEq("VolDown")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_VOLUME_DOWN, 0);
-    // }
-    // else if(cmdEq("Mute")){
-    //   KEYBOARD_SendKey(KEYBOARD_KEY_MUTE, 0);
-    // }
-    // // else if(cmdEq("%Test")){
-    // //   KEYBOARD_SendKey(KEYBOARD_KEY_MUTE, 0);
-    // // }
+    for (size_t i = 0; i < UART_BUFFER_SIZE; i++)
+    {
+      UART_Buffer[i] = 0;
+    }
+    HAL_UART_Receive(&huart1, UART_Buffer, UART_BUFFER_SIZE, 100);
+    if(UART_Buffer[0] == 0)
+      continue;
+    #define cmdEq(X) (strcmp(UART_Buffer, (X)) == 0)
+
+    if(UART_Buffer[0] == '%'){
+      KEYBOARD_Print(&(UART_Buffer[1]), KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Next")){
+       KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_SCAN_NEXT);
+    }
+    else if(cmdEq("Prev")){
+      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_SCAN_PREV);
+    }
+    else if(cmdEq("Pause")){
+      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_PAUSE);
+    }
+    else if(cmdEq("VolUp")){
+      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_VOL_INC);
+    }
+    else if(cmdEq("VolDown")){
+      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_VOL_DEC);
+    }
+    else if(cmdEq("Mute")){
+      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_MUTE);
+    }
+    else if(cmdEq("Esc")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_ESCAPE, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Lock")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_L, KEYBOARD_MOD_LEFT_WIN);
+    }
+    else if(cmdEq("Left")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Up")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_UP_ARROW, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Right")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_RIGHT_ARROW, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Left")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Down")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_DOWN_ARROW, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Reload")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_F5, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Enter")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_ENTER, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Tab")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("YTMusic")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("Backspace")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_DELETE, KEYBOARD_MOD_NO_MOD);
+    }
     // else{
     //   KEYBOARD_Print("NOOP\n", KEYBOARD_MOD_NO_MOD);
     //   KEYBOARD_Print(UART_Buffer, KEYBOARD_MOD_NO_MOD);
@@ -184,21 +175,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */    // Send HID report
-    mediaHID.keys = USB_HID_VOL_DEC;
-    USBD_HID_SendReport(&hUsbDeviceFS, &mediaHID, sizeof(struct mediaHID_t));
-    HAL_Delay(300);
-    mediaHID.keys = 0;
-    USBD_HID_SendReport(&hUsbDeviceFS, &mediaHID, sizeof(struct mediaHID_t));
-    HAL_Delay(300);
-
-    keyboardHID.modifiers = USB_HID_MODIFIER_RIGHT_SHIFT;
-    keyboardHID.key1 = USB_HID_KEY_L;
-    USBD_HID_SendReport(&hUsbDeviceFS, &keyboardHID, sizeof(struct keyboardHID_t));
-    HAL_Delay(300);
-    keyboardHID.modifiers = 0;
-    keyboardHID.key1 = 0;
-    USBD_HID_SendReport(&hUsbDeviceFS, &keyboardHID, sizeof(struct keyboardHID_t));
-    HAL_Delay(300);
   }
   /* USER CODE END 3 */
 }

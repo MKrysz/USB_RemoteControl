@@ -4,14 +4,18 @@
 #include "main.h"
 typedef struct
 {
-	uint8_t MODIFIER;
-	uint8_t RESERVED;
-	uint8_t KEYCODE[6];
+	uint8_t id;
+	uint8_t modifier;
+	uint8_t keys[3];
 } keyboardHID_t;
 
+typedef struct
+{
+	uint8_t id;
+	uint8_t keys;
+} mediaHID_t;
 
 // MODIFIER KEYS
-
 #define KEYBOARD_MOD_NO_MOD 0x00
 #define KEYBOARD_MOD_LEFT_CTRL 0x01
 #define KEYBOARD_MOD_LEFT_SHIFT 0x02
@@ -22,9 +26,18 @@ typedef struct
 #define KEYBOARD_MOD_RIGHT_ALT 0x40
 #define KEYBOARD_MOD_RIGHT_WIN 0x80
 
+// USB media codes
+#define KEYBOARD_MEDIA_SCAN_NEXT 0x01
+#define KEYBOARD_MEDIA_SCAN_PREV 0x02
+#define KEYBOARD_MEDIA_STOP      0x04
+#define KEYBOARD_MEDIA_EJECT     0x08
+#define KEYBOARD_MEDIA_PAUSE     0x10
+#define KEYBOARD_MEDIA_MUTE      0x20
+#define KEYBOARD_MEDIA_VOL_INC   0x40
+#define KEYBOARD_MEDIA_VOL_DEC   0x80
+
 
 //KEYCODES
-
 #define KEYBOARD_KEY_A 4
 #define KEYBOARD_KEY_B 5
 #define KEYBOARD_KEY_C 6
@@ -96,27 +109,29 @@ typedef struct
 #define KEYBOARD_KEY_PAUSE 72
 #define KEYBOARD_KEY_INSERT 73
 /* ... */
+#define KEYBOARD_DELETE_FORWARD 76
+/* ... */
 #define KEYBOARD_KEY_RIGHT_ARROW 79
 #define KEYBOARD_KEY_LEFT_ARROW 80
 #define KEYBOARD_KEY_DOWN_ARROW 81
 #define KEYBOARD_KEY_UP_ARROW 82
 /* ... */
-#define KEYBOARD_KEY_F13 104
-#define KEYBOARD_KEY_F14 105
-#define KEYBOARD_KEY_F15 106
-#define KEYBOARD_KEY_F16 107
-#define KEYBOARD_KEY_F17 108
-#define KEYBOARD_KEY_F18 109
-#define KEYBOARD_KEY_F19 110
-#define KEYBOARD_KEY_F20 111
-#define KEYBOARD_KEY_F21 112
-#define KEYBOARD_KEY_F22 113
-#define KEYBOARD_KEY_F23 114
-#define KEYBOARD_KEY_F24 115
-/* ... */
-#define KEYBOARD_KEY_MUTE 127
-#define KEYBOARD_KEY_VOLUME_UP 128
-#define KEYBOARD_KEY_VOLUME_DOWN 129
+// #define KEYBOARD_KEY_F13 104
+// #define KEYBOARD_KEY_F14 105
+// #define KEYBOARD_KEY_F15 106
+// #define KEYBOARD_KEY_F16 107
+// #define KEYBOARD_KEY_F17 108
+// #define KEYBOARD_KEY_F18 109
+// #define KEYBOARD_KEY_F19 110
+// #define KEYBOARD_KEY_F20 111
+// #define KEYBOARD_KEY_F21 112
+// #define KEYBOARD_KEY_F22 113
+// #define KEYBOARD_KEY_F23 114
+// #define KEYBOARD_KEY_F24 115
+// /* ... */
+// #define KEYBOARD_KEY_MUTE 127
+// #define KEYBOARD_KEY_VOLUME_UP 128
+// #define KEYBOARD_KEY_VOLUME_DOWN 129
 
 void KEYBOARD_Init();
 void KEYBOARD_Enter();
@@ -127,5 +142,7 @@ void KEYBOARD_SendKeys(uint8_t *keys, uint8_t nrOfKeys, uint8_t modifier);
 void KEYBOARD_PressKey(uint8_t key, uint8_t modifier);
 void KEYBOARD_Release();
 void KEYBOARD_PressKeys(uint8_t *keys, size_t nrOfKeys, uint8_t modifier);
+void KEYBOARD_MEDIA_Press(uint8_t media);
+void KEYBOARD_MEDIA_Send(uint8_t media);
 
 #endif /* E5BD33A5_2FCA_489D_BDA3_25396E6F4612 */

@@ -7,6 +7,22 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 uint32_t USB_delay;
 #define SEND_DELAY HAL_Delay(USB_delay)
 
+
+void KEYBOARD_MEDIA_Press(uint8_t media)
+{
+    mediaHID_t mediaReport = {0};
+    mediaReport.id = 2;
+    mediaReport.keys = media;
+    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &mediaReport, sizeof (mediaReport));
+    SEND_DELAY;
+}
+
+void KEYBOARD_MEDIA_Send(uint8_t media)
+{
+    KEYBOARD_MEDIA_Press(media);
+    KEYBOARD_MEDIA_Press(0);
+}
+
 void KEYBOARD_Init()
 {
     USB_delay = USBD_HID_GetPollingInterval(&hUsbDeviceFS);
@@ -15,11 +31,12 @@ void KEYBOARD_Init()
 void KEYBOARD_PressKeys(uint8_t *keys, size_t nrOfKeys, uint8_t modifier)
 {
     keyboardHID_t keyboardReport = {0};
-    for (size_t i = 0; i < 6; i++)
+    for (size_t i = 0; i < 3; i++)
     {
-        keyboardReport.KEYCODE[i] = i<nrOfKeys?keys[i]:0;
+        keyboardReport.keys[i] = i<nrOfKeys?keys[i]:0;
     }
-    keyboardReport.MODIFIER = modifier;
+    keyboardReport.modifier = modifier;
+    keyboardReport.id = 1;
     USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *) &keyboardReport, sizeof (keyboardReport));
     SEND_DELAY;
 }
