@@ -161,11 +161,44 @@ int main(void)
     else if(cmdEq("Tab")){
       KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_NO_MOD);
     }
-    else if(cmdEq("YTMusic")){
+    else if(cmdEq("Search")){
       KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
     }
     else if(cmdEq("Backspace")){
       KEYBOARD_SendKey(KEYBOARD_KEY_DELETE, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("ShutDown")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_D, KEYBOARD_MOD_LEFT_WIN);
+      HAL_Delay(500);
+      KEYBOARD_SendKey(KEYBOARD_KEY_F4, KEYBOARD_MOD_LEFT_ALT);
+      HAL_Delay(500);
+      KEYBOARD_Enter();
+    }
+    else if(cmdEq("YTMusic")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_X, KEYBOARD_MOD_LEFT_WIN);
+      HAL_Delay(500);
+      KEYBOARD_SendKey(KEYBOARD_KEY_I, KEYBOARD_MOD_NO_MOD);
+      HAL_Delay(500);
+      KEYBOARD_Print("start chrome https://music.youtube.com/", KEYBOARD_MOD_NO_MOD);
+      KEYBOARD_Enter();
+    }
+    else if(cmdEq("Search")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("NextTab")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL);
+    }
+    else if(cmdEq("PrevTab")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL || KEYBOARD_MOD_RIGHT_SHIFT);
+    }
+    else if(cmdEq("Connect")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_K, KEYBOARD_MOD_LEFT_WIN);
+    }
+    else if(cmdEq("F11")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_F11, KEYBOARD_MOD_NO_MOD);
+    }
+    else if(cmdEq("AltF4")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_F4, KEYBOARD_MOD_LEFT_ALT);
     }
     // else{
     //   KEYBOARD_Print("NOOP\n", KEYBOARD_MOD_NO_MOD);
