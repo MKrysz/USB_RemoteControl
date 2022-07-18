@@ -37,8 +37,8 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/gpio.c \
-Core/Src/keyboard.c \
 Core/Src/main.c \
+Core/Src/mouse.c \
 Core/Src/stm32f1xx_hal_msp.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/system_stm32f1xx.c \

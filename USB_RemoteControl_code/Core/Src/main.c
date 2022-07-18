@@ -26,7 +26,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
-#include "keyboard.h"
+#include <stdlib.h>
+#include "mouse.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,8 +37,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
-#define UART_BUFFER_SIZE 128
+#define DIVIDER 40
+#define DELAY 5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -92,122 +93,25 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  KEYBOARD_Init();
-  char UART_Buffer[UART_BUFFER_SIZE] = "";
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  HAL_Delay(3000);
   while (1)
   {
-    for (size_t i = 0; i < UART_BUFFER_SIZE; i++)
-    {
-      UART_Buffer[i] = 0;
-    }
-    HAL_UART_Receive(&huart1, UART_Buffer, UART_BUFFER_SIZE, 100);
-    if(UART_Buffer[0] == 0)
-      continue;
-    #define cmdEq(X) (strcmp(UART_Buffer, (X)) == 0)
+    int8_t x,y;
+    x = rand();
+    y = rand();
 
-    if(UART_Buffer[0] == '%'){
-      KEYBOARD_Print(&(UART_Buffer[1]), KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Next")){
-       KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_SCAN_NEXT);
-    }
-    else if(cmdEq("Prev")){
-      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_SCAN_PREV);
-    }
-    else if(cmdEq("Pause")){
-      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_PAUSE);
-    }
-    else if(cmdEq("VolUp")){
-      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_VOL_INC);
-    }
-    else if(cmdEq("VolDown")){
-      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_VOL_DEC);
-    }
-    else if(cmdEq("Mute")){
-      KEYBOARD_MEDIA_Send(KEYBOARD_MEDIA_MUTE);
-    }
-    else if(cmdEq("Esc")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_ESCAPE, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Lock")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_L, KEYBOARD_MOD_LEFT_WIN);
-    }
-    else if(cmdEq("Left")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Up")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_UP_ARROW, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Right")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_RIGHT_ARROW, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Left")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_LEFT_ARROW, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Down")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_DOWN_ARROW, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Reload")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_F5, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Enter")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_ENTER, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Tab")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Search")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("Backspace")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_DELETE, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("ShutDown")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_D, KEYBOARD_MOD_LEFT_WIN);
-      HAL_Delay(500);
-      KEYBOARD_SendKey(KEYBOARD_KEY_F4, KEYBOARD_MOD_LEFT_ALT);
-      HAL_Delay(500);
-      KEYBOARD_Enter();
-    }
-    else if(cmdEq("YTMusic")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_X, KEYBOARD_MOD_LEFT_WIN);
-      HAL_Delay(500);
-      KEYBOARD_SendKey(KEYBOARD_KEY_I, KEYBOARD_MOD_NO_MOD);
-      HAL_Delay(500);
-      KEYBOARD_Print("start chrome https://music.youtube.com/", KEYBOARD_MOD_NO_MOD);
-      KEYBOARD_Enter();
-    }
-    else if(cmdEq("Search")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("NextTab")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL);
-    }
-    else if(cmdEq("PrevTab")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL || KEYBOARD_MOD_RIGHT_SHIFT);
-    }
-    else if(cmdEq("Connect")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_K, KEYBOARD_MOD_LEFT_WIN);
-    }
-    else if(cmdEq("F11")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_F11, KEYBOARD_MOD_NO_MOD);
-    }
-    else if(cmdEq("AltF4")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_F4, KEYBOARD_MOD_LEFT_ALT);
-    }
-    // else{
-    //   KEYBOARD_Print("NOOP\n", KEYBOARD_MOD_NO_MOD);
-    //   KEYBOARD_Print(UART_Buffer, KEYBOARD_MOD_NO_MOD);
-    // }
+    MOUSE_Move(x/DIVIDER, y/DIVIDER);
+    HAL_GPIO_TogglePin(DBG_LED_GPIO_Port, DBG_LED_Pin);
+    HAL_Delay(DELAY);
 
     /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */    // Send HID report
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
