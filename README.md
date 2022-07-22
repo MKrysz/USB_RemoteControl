@@ -32,6 +32,6 @@ Embedded software was made using [STM32CubeMX](https://www.st.com/en/development
 
 ## Android App
 
-Android App was made using [MIT App Inventor](https://appinventor.mit.edu/), and in design it tries to imitate classical remote control with some additional functions like send text. Current version heavily supports controlling YTMusic web player.
+Android App was made using [MIT App Inventor](https://appinventor.mit.edu/), and in design it tries to imitate classical remote control with some additional functions like send text or change current tan in a browser. Current version heavily supports controlling YTMusic web player.
 
 ![App Screenshot](USB_RemoteControl_readme/AppScreenshot.png)
