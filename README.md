@@ -2,9 +2,7 @@
 
 ## About
 
-The goal of this project was to make an USB keyboard device that would connect to your phone via Bluetooth and allow you to control your PC with your phone with minimal setup. That was possible using a standard USB HID protocol so that every computer working with HID devices will also work with this device without any additional software. Only setup is needed on smartphones side, i.e. installing the app and connecting to the dongle.
-
-**ADD VIDEO presentation**
+The goal of this project was to make an USB dongle allowing you to remotly control your PC with your phone with minimal setup. I achieved it by combining microcontroller with USB HID interface and Bluetooth module. Thanks to utilizing standard HID interface the receiver side is plug-and-play. Only setup is needed on smartphones side, i.e. installing the app and connecting to the dongle.
 
 ## Hardware
 
@@ -28,10 +26,11 @@ After soldering everything and trying to test the board I found out I could get 
 
 Embedded software was made using [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html) and VSCode using [stm32-for-vscode](https://github.com/bmd-studio/stm32-for-vscode) extension.
 
+F
 **Think about what to write here (maybe smth about USB descriptor?)** -->
 
 ## Android App
 
-Android App was made using [MIT App Inventor](https://appinventor.mit.edu/), and in design it tries to imitate classical remote control with some additional functions like send text or change current tan in a browser. Current version heavily supports controlling YTMusic web player.
+Android App was made using [MIT App Inventor](https://appinventor.mit.edu/), and in design it tries to imitate classical remote control with some additional functions like send text or change current tab in a browser. Current version heavily supports controlling YTMusic web player.
 
 ![App Screenshot](USB_RemoteControl_readme/AppScreenshot.png)
