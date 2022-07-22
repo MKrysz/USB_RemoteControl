@@ -185,11 +185,11 @@ int main(void)
     else if(cmdEq("Search")){
       KEYBOARD_SendKey(KEYBOARD_KEY_SLASH, KEYBOARD_MOD_NO_MOD);
     }
+    else if(cmdEq("PrevTab")){
+      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, (KEYBOARD_MOD_LEFT_CTRL | KEYBOARD_MOD_RIGHT_SHIFT));
+    }
     else if(cmdEq("NextTab")){
       KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL);
-    }
-    else if(cmdEq("PrevTab")){
-      KEYBOARD_SendKey(KEYBOARD_KEY_TAB, KEYBOARD_MOD_LEFT_CTRL || KEYBOARD_MOD_RIGHT_SHIFT);
     }
     else if(cmdEq("Connect")){
       KEYBOARD_SendKey(KEYBOARD_KEY_K, KEYBOARD_MOD_LEFT_WIN);
