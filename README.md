@@ -2,7 +2,7 @@
 
 ## About
 
-The goal of this project was to make an USB dongle allowing you to remotly control your PC with your phone with minimal setup. I achieved it by combining microcontroller with USB HID interface and Bluetooth module. Thanks to utilizing standard HID interface the receiver side is plug-and-play. Only setup is needed on smartphones side, i.e. installing the app and connecting to the dongle.
+The goal of this project was to make an USB dongle allowing you to remotely control your PC with your phone with minimal setup. I achieved it by combining microcontroller with USB HID interface and Bluetooth module. Thanks to utilizing standard HID interface the receiver side is plug-and-play. Only setup is needed on smartphones side, i.e. installing the app and connecting to the dongle.
 
 ## Hardware
 
